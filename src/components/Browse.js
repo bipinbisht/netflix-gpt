@@ -3,26 +3,35 @@ import Header from './Header'
 import MainContainer from './MainContainer'
 import SecondaryContainer from './SecondaryContainer'
 import usePopularMovies from '../customHooks/usePopularMovies'
+import SearchGpt from './SearchGpt'
+import { useSelector } from 'react-redux'
 const Browse = () => {
+  const toggleSearch = useSelector((store) => store.gpt.toggleSearch)
+  console.log(toggleSearch)
   useNowPlayingMovies()
   usePopularMovies()
   return (
     <div>
       <Header />
+      {toggleSearch ? (
+        <SearchGpt />
+      ) : (
+        <>
+          <MainContainer />
+          <SecondaryContainer />
+        </>
+      )}
+    </div>
+  )
+}
 
-      <MainContainer />
-      <SecondaryContainer />
+export default Browse
 
-      {/* 
+/* 
         MainContainer
             1-videobackground
             2-title
          SecondaryContainer
             1-MovieList *n
                 -cards*n   
-      */}
-    </div>
-  )
-}
-
-export default Browse
+      */
