@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { addUser, removeUser } from '../utils/userSlice'
 import user_avatar from './Img/user.png'
-import { setToggleSearch } from '../utils/searchSlice'
+import { removeSearchMovies, setToggleSearch } from '../utils/searchSlice'
 import { SUPPORTED_LANGUAGES } from '../utils/constant'
 import { changeLanguage } from '../utils/configSlice'
 
@@ -15,9 +15,13 @@ const Header = () => {
   const navigate = useNavigate()
   const user = useSelector((store) => store.user)
   const toggle = useSelector((store) => store.gpt?.toggleSearch)
+
   const handleSearch = () => {
     console.log('inside handle search' + toggle)
     dispatch(setToggleSearch())
+    if (!toggle) {
+      dispatch(removeSearchMovies())
+    }
   }
 
   const handleSignOut = () => {
