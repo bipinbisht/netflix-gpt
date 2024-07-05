@@ -6,10 +6,16 @@ const SearchGpt = () => {
   return (
     <div>
       <div className="fixed -z-10">
-        <img src={IMG_BG} alt="BG_Search"></img>
+        <img
+          src={IMG_BG}
+          alt="BG_Search"
+          className=" h-screen object-cover md:h-fit "
+        ></img>
       </div>
-      <SearchBar />
-      <MovieSuggestion />
+      <div className="">
+        <SearchBar />
+        <MovieSuggestion />
+      </div>
     </div>
   )
 }

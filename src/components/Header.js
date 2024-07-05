@@ -17,7 +17,7 @@ const Header = () => {
   const toggle = useSelector((store) => store.gpt?.toggleSearch)
 
   const handleSearch = () => {
-    console.log('inside handle search' + toggle)
+    // console.log('inside handle search' + toggle)
     dispatch(setToggleSearch())
     if (!toggle) {
       dispatch(removeSearchMovies())
@@ -25,6 +25,8 @@ const Header = () => {
   }
 
   const handleSignOut = () => {
+    dispatch(removeSearchMovies())
+    dispatch(setToggleSearch())
     signOut(auth)
       .then(() => {})
       .catch((error) => {})
@@ -62,14 +64,14 @@ const Header = () => {
   }
 
   return (
-    <div className=" w-screen absolute bg-gradient-to-b from-black px-8 py-2 z-20 flex justify-between  ">
-      <img className="w-44" src={Logo} alt="Logo"></img>
+    <div className=" w-screen absolute bg-gradient-to-b from-black px-8 py-2 z-20 flex justify-between flex-col md:flex-row  ">
+      <img className="w-44 mx-auto md:mx-0" src={Logo} alt="Logo"></img>
 
       {user && (
-        <div className="flex p-2">
+        <div className="flex md:p-2 justify-center">
           {toggle && (
             <select
-              className="p-2 m-2 bg-gray-900 text-white"
+              className="md:p-2 md:m-2 bg-gray-900 text-white p-2 m-4"
               onChange={handleLanguageChange}
             >
               {SUPPORTED_LANGUAGES.map((lang) => (
@@ -81,7 +83,7 @@ const Header = () => {
           )}
           {/* <img src={usr_icon} alt="usericon" className="w-10 h-10 my-2"></img> */}
           <button
-            className="bg-blue-800 text-white mx-4 px-4  py-2 my-2 rounded-lg hover:opacity-80"
+            className="bg-blue-800 text-white md:mx-4 md:px-4  md:py-2 md:my-2 md:rounded-lg hover:opacity-80 mx-1 my-2 px-2 rounded-sm  "
             onClick={handleSearch}
           >
             {toggle ? 'Home Page' : ' Search Movies?'}
@@ -89,12 +91,12 @@ const Header = () => {
           <img
             src={user_avatar}
             alt="usericon"
-            className="w-10 h-10 my-2"
+            className="md:block :w-10 md:h-10 md:my-2  hidden"
           ></img>
           <button className="font-bold text-white mx-4" onClick={handleSignOut}>
             Sign Out
           </button>
-          <p className="font-bold text-white py-4 font-serif">
+          <p className="font-bold text-white py-4 font-serif ">
             {user?.displayName}
           </p>
         </div>

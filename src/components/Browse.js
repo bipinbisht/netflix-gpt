@@ -7,13 +7,15 @@ import SearchGpt from './SearchGpt'
 import { useSelector } from 'react-redux'
 const Browse = () => {
   const toggleSearch = useSelector((store) => store.gpt.toggleSearch)
-  console.log(toggleSearch)
+  const user = useSelector((store) => store.user)
+  // console.log(user?.displayName)
+  // console.log(toggleSearch)
   useNowPlayingMovies()
   usePopularMovies()
   return (
     <div>
       <Header />
-      {toggleSearch ? (
+      {toggleSearch && user ? (
         <SearchGpt />
       ) : (
         <>
